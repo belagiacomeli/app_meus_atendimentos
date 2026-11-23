@@ -9,10 +9,21 @@ export interface DataRepository {
   save(data: AppData): void;
 }
 
-/** Lista padrão da primeira versão. Quem nunca editou a lista recebe a nova. */
-const LEGACY_PROCS = ["Escova", "Progressiva", "Limpeza de mega hair"];
+/** Listas padrão de versões anteriores. Quem nunca editou a lista recebe a atual. */
+const LEGACY_LISTS: string[][] = [
+  ["Escova", "Progressiva", "Limpeza de mega hair"],
+  [
+    "Escova",
+    "Progressiva",
+    "Hidratação",
+    "Limpeza de mega hair",
+    "Retirada de mega hair e passada de fita",
+    "Descoloração",
+    "Coloração",
+  ],
+];
 const isLegacy = (procs: unknown[]) =>
-  procs.length === LEGACY_PROCS.length && LEGACY_PROCS.every((p, i) => procs[i] === p);
+  LEGACY_LISTS.some((l) => l.length === procs.length && l.every((p, i) => procs[i] === p));
 
 const KEY = "atendimentos_v1"; // mesma chave da versão antiga: dados existentes continuam valendo
 

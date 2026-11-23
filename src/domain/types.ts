@@ -21,7 +21,8 @@ export const DEFAULT_PROCS = [
   "Progressiva",
   "Hidratação",
   "Limpeza de mega hair",
-  "Retirada de mega hair e passada de fita",
+  "Retirada de mega hair",
+  "Passada de fita",
   "Descoloração",
   "Coloração",
 ];
