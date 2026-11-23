@@ -4,6 +4,8 @@ App para anotar os atendimentos do dia, somar a semana (terça a sábado) e mand
 
 React + TypeScript + Vite. Login e banco de dados no Supabase (Postgres). Cada pessoa vê só os próprios dados.
 
+Publicado na Vercel: https://app-meus-atendimentos.vercel.app (cada push na `main` publica sozinho).
+
 ## Rodando
 
 ```bash
