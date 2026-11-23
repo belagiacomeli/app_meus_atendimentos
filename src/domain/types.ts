@@ -16,7 +16,15 @@ export interface AppData {
   name: string;
 }
 
-export const DEFAULT_PROCS = ["Escova", "Progressiva", "Limpeza de mega hair"];
+export const DEFAULT_PROCS = [
+  "Escova",
+  "Progressiva",
+  "Hidratação",
+  "Limpeza de mega hair",
+  "Retirada de mega hair e passada de fita",
+  "Descoloração",
+  "Coloração",
+];
 
 export const emptyData = (): AppData => ({
   entries: [],

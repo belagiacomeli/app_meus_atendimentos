@@ -36,7 +36,6 @@ export function EntryForm({ editing, lastDate, onSaved, onCancel }: Props) {
     if (!procName) return toast("Escolha o procedimento");
     if (!cents) return toast("Digite o valor");
 
-    if (proc === NEW_PROC) dispatch({ type: "proc/add", name: procName });
     const entry: Entry = { id: editing?.id ?? uid(), date, client: client.trim(), proc: procName, cents };
     dispatch({ type: editing ? "entry/update" : "entry/add", entry });
 
@@ -45,7 +44,7 @@ export function EntryForm({ editing, lastDate, onSaved, onCancel }: Props) {
       setClient("");
       setValue("");
       setNewProc("");
-      setProc(procName);
+      setProc(data.procs[0] ?? "");
     }
     onSaved(date);
   }
@@ -77,12 +76,12 @@ export function EntryForm({ editing, lastDate, onSaved, onCancel }: Props) {
             {p}
           </option>
         ))}
-        <option value={NEW_PROC}>+ Outro (novo)</option>
+        <option value={NEW_PROC}>Outro (escrever)</option>
       </select>
       {proc === NEW_PROC && (
         <input
           type="text"
-          placeholder="Nome do novo procedimento"
+          placeholder="Escreva o serviço feito"
           style={{ marginTop: 8 }}
           autoFocus
           value={newProc}
