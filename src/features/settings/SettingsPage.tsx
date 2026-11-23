@@ -5,7 +5,6 @@ import { useAppData } from "@/state/AppDataContext";
 export function SettingsPage() {
   const { data, dispatch } = useAppData();
   const toast = useToast();
-  const [name, setName] = useState(data.name);
   const [newProc, setNewProc] = useState("");
 
   function addProc() {
@@ -20,17 +19,16 @@ export function SettingsPage() {
     <>
       <div className="card">
         <b>Seu nome</b>
-        <div className="sub">Aparece no topo do PDF.</div>
-        <input type="text" placeholder="Seu nome" value={name} onChange={(e) => setName(e.target.value)} />
-        <button
-          className="btn sec"
-          onClick={() => {
-            dispatch({ type: "name/set", name: name.trim() });
-            toast("Nome salvo ✓");
-          }}
-        >
-          Salvar nome
-        </button>
+        <div className="sub">Salva sozinho neste aparelho. Aparece no topo do PDF.</div>
+        <input
+          id="p-name"
+          type="text"
+          placeholder="Seu nome"
+          autoComplete="given-name"
+          value={data.name}
+          onChange={(e) => dispatch({ type: "name/set", name: e.target.value })}
+          onBlur={(e) => dispatch({ type: "name/set", name: e.target.value.trim() })}
+        />
       </div>
 
       <div className="card">

@@ -6,6 +6,7 @@ import { formatMoney } from "@/domain/money";
 import type { ISODate } from "@/domain/types";
 import { copyText } from "@/services/clipboard";
 import { useAppData } from "@/state/AppDataContext";
+import { NamePrompt } from "@/features/settings/NamePrompt";
 import { EntryForm } from "./EntryForm";
 import { EntryItem } from "./EntryItem";
 
@@ -41,7 +42,7 @@ export function WeekPage({ weekStart, onWeekChange }: Props) {
     try {
       // carrega o jsPDF só quando precisa: deixa a abertura do app mais leve
       const { buildWeekPdf, downloadBlob, pdfFilename } = await import("@/services/pdf");
-      downloadBlob(buildWeekPdf(data.entries, weekStart, data.name), pdfFilename(weekStart));
+      downloadBlob(buildWeekPdf(data.entries, weekStart, data.name.trim()), pdfFilename(weekStart));
       toast("PDF pronto ✓");
     } catch {
       toast("Não consegui gerar o PDF");
@@ -50,6 +51,7 @@ export function WeekPage({ weekStart, onWeekChange }: Props) {
 
   return (
     <>
+      <NamePrompt />
       {/* key força recriar o formulário ao trocar entre novo/editar */}
       <EntryForm
         key={editingId ?? "new"}

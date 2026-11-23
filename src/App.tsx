@@ -5,15 +5,20 @@ import type { ISODate } from "@/domain/types";
 import { HistoryPage } from "@/features/history/HistoryPage";
 import { SettingsPage } from "@/features/settings/SettingsPage";
 import { WeekPage } from "@/features/week/WeekPage";
+import { useAppData } from "@/state/AppDataContext";
 
 export default function App() {
+  const { data } = useAppData();
+  const firstName = data.name.trim().split(/\s+/)[0];
   const [tab, setTab] = useState<TabId>("semana");
   const [weekStart, setWeekStart] = useState<ISODate>(() => weekStartOf(today()));
 
   return (
     <div className="wrap">
       <h1>Meus Atendimentos</h1>
-      <div className="sub">Anote o dia, some a semana e mande para a chefe.</div>
+      <div className="sub">
+        {firstName ? `Olá, ${firstName}. ` : ""}Anote o dia, some a semana e mande para a chefe.
+      </div>
       <Tabs active={tab} onChange={setTab} />
 
       {tab === "semana" && <WeekPage weekStart={weekStart} onWeekChange={setWeekStart} />}
