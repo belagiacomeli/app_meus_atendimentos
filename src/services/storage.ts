@@ -9,6 +9,11 @@ export interface DataRepository {
   save(data: AppData): void;
 }
 
+/** Lista padrão da primeira versão. Quem nunca editou a lista recebe a nova. */
+const LEGACY_PROCS = ["Escova", "Progressiva", "Limpeza de mega hair"];
+const isLegacy = (procs: unknown[]) =>
+  procs.length === LEGACY_PROCS.length && LEGACY_PROCS.every((p, i) => procs[i] === p);
+
 const KEY = "atendimentos_v1"; // mesma chave da versão antiga: dados existentes continuam valendo
 
 /** Aceita qualquer coisa vinda do disco e devolve dados válidos. */
@@ -18,7 +23,7 @@ export function normalize(raw: unknown): AppData {
   const d = raw as Partial<AppData>;
   if (typeof d.name === "string") out.name = d.name;
   if (Array.isArray(d.entries)) out.entries = d.entries;
-  if (Array.isArray(d.procs) && d.procs.length) out.procs = d.procs;
+  if (Array.isArray(d.procs) && d.procs.length && !isLegacy(d.procs)) out.procs = d.procs;
   else out.procs = [...DEFAULT_PROCS];
   return out;
 }
