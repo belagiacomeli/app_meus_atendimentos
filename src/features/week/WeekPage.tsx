@@ -92,7 +92,8 @@ export function WeekPage({ weekStart, onWeekChange }: Props) {
           {groupByDay(list).map((day) => (
             <div key={day.date}>
               <div className="day">
-                <span>{dayLabel(day.date)}</span>
+                <span className="name">{dayLabel(day.date)}</span>
+                <span className="rule" aria-hidden="true" />
                 <span>{formatMoney(sum(day.items))}</span>
               </div>
               {day.items.map((entry) => (

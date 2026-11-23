@@ -12,10 +12,8 @@ export default function App() {
 
   return (
     <div className="wrap">
-      <h1>Meus Atendimentos ✂️</h1>
-      <div className="sub">
-        <b>Meus Atendimentos</b> · anote o dia, some a semana e mande para a chefe.
-      </div>
+      <h1>Meus Atendimentos</h1>
+      <div className="sub">Anote o dia, some a semana e mande para a chefe.</div>
       <Tabs active={tab} onChange={setTab} />
 
       {tab === "semana" && <WeekPage weekStart={weekStart} onWeekChange={setWeekStart} />}
