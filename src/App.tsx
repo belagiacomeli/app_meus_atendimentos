@@ -33,7 +33,7 @@ export default function App() {
       )}
       {tab === "ajustes" && <SettingsPage />}
 
-      <div className="status">Dados salvos só neste aparelho</div>
+      <div className="status">Dados salvos na sua conta</div>
     </div>
   );
 }

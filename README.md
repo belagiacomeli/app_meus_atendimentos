@@ -2,7 +2,7 @@
 
 App para anotar os atendimentos do dia, somar a semana (terça a sábado) e mandar o resumo ou PDF para a chefe.
 
-React + TypeScript + Vite. Os dados ficam no `localStorage` do aparelho.
+React + TypeScript + Vite. Login e banco de dados no Supabase (Postgres). Cada pessoa vê só os próprios dados.
 
 ## Rodando
 
@@ -27,4 +27,10 @@ src/
 
 Regra de dependência: `features -> state -> services/domain`. O `domain` não importa nada de fora.
 
-Para trocar o armazenamento (ex.: Firebase), implemente `DataRepository` em `services/storage.ts` e passe para `<AppDataProvider repository={...}>`.
+## Banco de dados (Supabase)
+
+1. Rode `supabase/schema.sql` no SQL Editor do projeto (cria as tabelas e as regras de segurança).
+2. A URL e a chave pública (publishable) ficam em `src/services/supabase.ts`. Para outro projeto, defina `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`.
+3. No primeiro login, os dados que já estavam no aparelho (localStorage) são enviados para a conta, e uma cópia fica em `atendimentos_v1_backup`.
+
+Para trocar de banco, implemente `DataRepository` (`services/storage.ts`) e passe para `<AppDataProvider repository={...}>`.

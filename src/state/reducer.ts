@@ -1,6 +1,7 @@
 import { DEFAULT_PROCS, type AppData, type Entry } from "@/domain/types";
 
 export type Action =
+  | { type: "data/replace"; data: AppData }
   | { type: "entry/add"; entry: Entry }
   | { type: "entry/update"; entry: Entry }
   | { type: "entry/delete"; id: string }
@@ -10,6 +11,8 @@ export type Action =
 
 export function reducer(state: AppData, action: Action): AppData {
   switch (action.type) {
+    case "data/replace":
+      return action.data;
     case "entry/add":
       return { ...state, entries: [...state.entries, action.entry] };
     case "entry/update":

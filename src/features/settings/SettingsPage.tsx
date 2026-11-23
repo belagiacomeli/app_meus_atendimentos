@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useToast } from "@/components/Toast";
 import { useAppData } from "@/state/AppDataContext";
+import { useAuth } from "@/state/AuthContext";
 
 export function SettingsPage() {
   const { data, dispatch } = useAppData();
   const toast = useToast();
+  const { user, signOut } = useAuth();
   const [newProc, setNewProc] = useState("");
 
   function addProc() {
@@ -54,6 +56,16 @@ export function SettingsPage() {
         />
         <button className="btn" onClick={addProc}>
           Adicionar à lista
+        </button>
+      </div>
+
+      <div className="card">
+        <b>Conta</b>
+        <div className="sub" style={{ overflowWrap: "anywhere" }}>
+          {user.email}
+        </div>
+        <button className="btn sec" onClick={signOut}>
+          Sair
         </button>
       </div>
     </>
