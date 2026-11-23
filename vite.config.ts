@@ -1,0 +1,11 @@
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+import { fileURLToPath } from "node:url";
+
+// base "./" faz o build funcionar em qualquer subcaminho (ex.: GitHub Pages).
+export default defineConfig({
+  base: "./",
+  plugins: [react()],
+  resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
+  test: { environment: "node" },
+});
